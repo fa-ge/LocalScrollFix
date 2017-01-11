@@ -1,0 +1,34 @@
+{
+  "name": "localscrollfix",
+  "version": "1.0.0",
+  "description": "LocalScrollFix ios局部滚动bug",
+  "main": "lib/LocalScrollFix.js",
+  "scripts": {
+    "start": "webpack-dev-server --env=dev --host 0.0.0.0",
+    "lib": "rimraf lib/* & webpack --env=lib",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.18.0",
+    "minimist": "^1.2.0",
+    "rimraf": "^2.5.4",
+    "webpack": "^2.2.0-rc.3",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "keywords": [
+    "LocalScrollFix",
+    "ScrollFix"
+  ],
+  "author": "fa-ge",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fa-ge/LocalScrollFix.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fa-ge/LocalScrollFix/issues"
+  },
+  "homepage": "https://github.com/fa-ge/LocalScrollFix#readme"
+}
