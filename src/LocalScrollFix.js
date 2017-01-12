@@ -5,6 +5,10 @@ export default class LocalScrollFix {
     constructor(win) {
         if(!win || win === window)
             return null
+
+        if (!(win instanceof HTMLElement)) {
+            throw new Error('parameter 1 must be a HTMLElement instance!')
+        }
         this.win = win
 
         const fixDom = win.querySelector('.localScrollFix-fixDom')
