@@ -1,7 +1,5 @@
 
 import LocalScrollFix from '../LocalScrollFix'
-import ScrollFix from 'ScrollFix'
-new ScrollFix(document.querySelector('.window'))
 const localScrollFix = new LocalScrollFix(document.querySelector('.window'))
 
 setTimeout(() => {
