@@ -1,6 +1,6 @@
 {
   "name": "localscrollfix",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "LocalScrollFix ios局部滚动bug",
   "main": "lib/LocalScrollFix.js",
   "scripts": {
