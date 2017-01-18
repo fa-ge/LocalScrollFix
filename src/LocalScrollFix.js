@@ -44,7 +44,7 @@ export default class LocalScrollFix {
 
         const fixDomPaddingTop = this.computerFixDomPaddingTop()
         if (fixDomPaddingTop >= 0) {
-            this.fixDom.style.paddingTop = `${fixDomPaddingTop + 2}px`
+            this.fixDom.style.paddingTop = `${fixDomPaddingTop + 3}px`
         } else {
             this.arrived()
         }
