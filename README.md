@@ -27,6 +27,7 @@ const LocalScrollFix = require('LocalScrollFix').default
 ```javascript
 const localScrollFix = new LocalScrollFix(document.querySelector('.win'))
 //当你需要更新win的内容的时候你需要调用localScrollFix.update()
+// 切记一定要在dom更新完成后才能使用update才会生效
 ```
 
  示例的使用见https://github.com/fa-ge/LocalScrollFix/blob/master/src/demo/index.js

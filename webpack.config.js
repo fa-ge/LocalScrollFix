@@ -9,7 +9,7 @@ if (args.env === 'lib') {
             LocalScrollFix: './src/LocalScrollFix.js'
         },
         output: {
-            path: './lib',
+            path: path.resolve(__dirname, './lib'),
             filename: '[name].js',
             library: 'LocalScrollFix.js',
             libraryTarget: 'umd'

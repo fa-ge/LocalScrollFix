@@ -2,7 +2,7 @@
  * 使ios浏览器中局部滚动内容未占满视窗的一屏时候不出界
  */
 export default class LocalScrollFix {
-    constructor(win) {
+    constructor(win, fixDistance = 1) {
         if(!win || win === window)
             return null
 
@@ -10,6 +10,7 @@ export default class LocalScrollFix {
             throw new Error('parameter 1 must be a HTMLElement instance!')
         }
         this.win = win
+        this.fixDistance = fixDistance
 
         const fixDom = win.querySelector('.localScrollFix-fixDom')
         if (!fixDom) {
@@ -44,7 +45,7 @@ export default class LocalScrollFix {
 
         const fixDomPaddingTop = this.computerFixDomPaddingTop()
         if (fixDomPaddingTop >= 0) {
-            this.fixDom.style.paddingTop = `${fixDomPaddingTop + 3}px`
+            this.fixDom.style.paddingTop = `${fixDomPaddingTop + this.fixDistance}px`
         } else {
             this.arrived()
         }
