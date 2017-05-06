@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ios局部滚动的修复</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing:border-box;
+        }
+        .window {
+            height: 400px;
+            width: 100%;
+            border: 1px solid black;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+       
+    </style>
+</head>
+<body>
+<div class="window">
+    测试
+</div>
+<script src="LocalScrollFix.js"></script>
+<script>
+    LocalScrollFix('.window')
+</script>
+</body>
+</html>
