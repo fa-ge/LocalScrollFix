@@ -5,13 +5,12 @@
  */
 
 ;(function() {
-    var LocalScrollFix = function(win, alwaysOverAScreenFlag) {
+    var LocalScrollFix = function(win) {
         // 只在ios局部滚动的时候才会有这个bug
         if (!/iphone/i.test(window.navigator.userAgent)) {
             return
         }
 
-        var alwaysOverAScreenFlag = alwaysOverAScreenFlag || true
         var startY, startTopScroll
 
         win = typeof win === 'string' ? document.querySelector(win) : win
@@ -20,18 +19,16 @@
             return
         }
 
-        if (alwaysOverAScreenFlag) {
-            var winStyles = window.getComputedStyle(win, null)
-            var borderWidth = parseFloat(winStyles.borderBottomWidth) + parseFloat(winStyles.borderTopWidth)
-            win.insertAdjacentHTML(
-                'afterbegin',
-                '<div style="width: 1px;float: left;height: calc(100% + ' + (borderWidth + 1) + 'px);margin-left: -1px;"></div>'
-            )
-            win.insertAdjacentHTML(
-                'beforeend',
-                '<div style="width: 100%;clear: both;"></div>'
-            )
-        }
+        var winStyles = window.getComputedStyle(win, null)
+        var borderWidth = parseFloat(winStyles.borderBottomWidth) + parseFloat(winStyles.borderTopWidth)
+        win.insertAdjacentHTML(
+            'afterbegin',
+            '<div style="width: 1px;float: left;height: calc(100% + ' + (borderWidth + 1) + 'px);margin-left: -1px;"></div>'
+        )
+        win.insertAdjacentHTML(
+            'beforeend',
+            '<div style="width: 100%;clear: both;"></div>'
+        )
 
         win.addEventListener(
             'touchstart',
