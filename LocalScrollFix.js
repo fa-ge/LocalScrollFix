@@ -15,7 +15,7 @@
 
         win = typeof win === 'string' ? document.querySelector(win) : win
 
-        if (!win) {
+        if (!win || win === window) {
             return
         }
 
