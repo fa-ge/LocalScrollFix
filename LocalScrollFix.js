@@ -1,8 +1,22 @@
 /**
- * 使ios浏览器中局部滚动内容未占满视窗的一屏时候不出界
  * author: fa-ge
  * github: https://github.com/fa-ge/LocalScrollFix
  */
+
+function createHeadTag() {
+    var styleNode = document.createElement('style')
+    styleNode.className = 'localscrollfix-head'
+    document.head.appendChild(styleNode)
+    return styleNode
+}
+
+function addStyleText(cssText) {
+    var head = document.querySelector('.localscrollfix-head')
+    if (head === null) {
+        head = createHeadTag()
+    }
+    head.appendChild(document.createTextNode(cssText))
+}
 
 ;(function() {
     var LocalScrollFix = function(win) {
@@ -15,14 +29,23 @@
         }
 
         var winStyles = window.getComputedStyle(win, null)
-        var borderWidth = parseFloat(winStyles.borderBottomWidth) + parseFloat(winStyles.borderTopWidth)
-        win.insertAdjacentHTML(
-            'afterbegin',
-            '<div style="width: 1px;float: left;height: calc(100% + ' +
-                (borderWidth + 1) +
-                'px);margin-left: -1px;"></div>'
+        var borderWidth = parseFloat(winStyles.borderBottomWidth) + parseFloat(winStyles.borderTopWidth) + 1
+
+        var unique = 'localscrollfix-' + Date.now()
+        win.setAttribute(unique, '')
+
+        addStyleText(
+            '[' +
+                unique +
+                ']:before {content:"";width: 1px;float: left;height: -webkit-calc(100% + ' +
+                borderWidth +
+                'px);height: calc(100% + ' +
+                borderWidth +
+                'px);margin-left: -1px;}' +
+                '[' +
+                unique +
+                ']:after {content:"";width: 100%;clear: both;}'
         )
-        win.insertAdjacentHTML('beforeend', '<div style="width: 100%;clear: both;"></div>')
 
         win.addEventListener(
             'touchstart',
