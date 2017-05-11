@@ -31,7 +31,7 @@ function addStyleText(cssText) {
         var winStyles = window.getComputedStyle(win, null)
         var borderWidth = parseFloat(winStyles.borderBottomWidth) + parseFloat(winStyles.borderTopWidth) + 1
 
-        var unique = 'localscrollfix-' + Date.now()
+        var unique = 'localscrollfix-' + Date.now() + ~~(Math.random() * 100000)
         win.setAttribute(unique, '')
 
         addStyleText(
