@@ -3,24 +3,23 @@
  * github: https://github.com/fa-ge/LocalScrollFix
  */
 
-function createHeadTag() {
-    var styleNode = document.createElement('style')
-    styleNode.className = 'localscrollfix-head'
-    document.head.appendChild(styleNode)
-    return styleNode
-}
-
-function addStyleText(cssText) {
-    var head = document.querySelector('.localscrollfix-head')
-    if (head === null) {
-        head = createHeadTag()
-    }
-    head.appendChild(document.createTextNode(cssText))
-}
-
 ;(function() {
+    function createHeadTag() {
+        var styleNode = document.createElement('style')
+        styleNode.className = 'localscrollfix-head'
+        document.head.appendChild(styleNode)
+        return styleNode
+    }
+
+    function addStyleText(cssText) {
+        var head = document.querySelector('.localscrollfix-head')
+        if (head === null) {
+            head = createHeadTag()
+        }
+        head.appendChild(document.createTextNode(cssText))
+    }
     var LocalScrollFix = function(win) {
-        var startY, startTopScroll
+        var startTopScroll
         win = typeof win === 'string' ? document.querySelector(win) : win
 
         // 只在ios局部滚动的时候才会有这个bug
@@ -47,22 +46,43 @@ function addStyleText(cssText) {
                 ']:after {content:"";width: 100%;clear: both;}'
         )
 
-        win.addEventListener(
-            'touchstart',
-            function(event) {
-                startY = event.touches[0].pageY
-                startTopScroll = win.scrollTop
+        function scrollTopHandler() {
+            startTopScroll = win.scrollTop
 
-                if (startTopScroll <= 0) {
+            if (startTopScroll <= 0) {
+                win.scrollTop = 1
+                return
+            }
+
+            if (startTopScroll + win.offsetHeight >= win.scrollHeight) {
+                win.scrollTop = win.scrollHeight - win.offsetHeight - 1
+                if (win.scrollTop <= 0) {
                     win.scrollTop = 1
                 }
-
-                if (startTopScroll + win.offsetHeight >= win.scrollHeight) {
-                    win.scrollTop = win.scrollHeight - win.offsetHeight - 1
-                }
+            }
+        }
+        var enableScroll = true
+        win.addEventListener(
+            'touchstart',
+            function() {
+                enableScroll = true
+                scrollTopHandler()
             },
             false
         )
+        win.addEventListener('scroll', function() {
+            clearTimeout(this.timer)
+            this.timer = setTimeout(function() {
+                if (enableScroll) {
+                    scrollTopHandler()
+                    enableScroll = false
+                }
+            }, 150)
+        })
+
+        if (win.scrollTop <= 0) {
+            win.scrollTop = 1
+        }
     }
 
     if (typeof window != 'undefined' && typeof module == 'undefined') {
